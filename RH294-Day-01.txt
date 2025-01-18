@@ -1,0 +1,150 @@
+### Point-01#
+#Product Name - Red Hat Ansible Automation Platfrom (AAP 2.x).
+ https://ansible.com -> https://www.redhat.com/en/ansible-collaborative?intcmp=7015Y000003t7aWQAQ
+ https://www.redhat.com/en/technologies/management/ansible?sc_cid=7015Y000003szaKQAQ
+
+# Training Modules:-
+1st Level - Rh294v9 - EX294v9 (AAP = 2.X)
+2nd Level - COE level of Training & Certification.
+ DO374 - Advance AAP 
+ DO417 - Window 
+ DO457 - Network Automation (Router, switch or other Network Device).
+         Cisco ISO, vios network devices w.r.t training.
+ DO467 - Controller (Know as Ansible Tower).
+ 
+#Ansible document - https://docs.ansible.com
+
+
+### Point-02#
+LAB env - ROL - RedHat Online Learning 
+
+https://rol.redhat.com [RedHat Login ID, password]
+https://rhtapps.redhat.com/rhlsfree?partner=syssrc
+
+LAB env w.r.t RH294
+1) Users:-
+   root/redhat      [Super User] 
+   student/student  [having sudo access with sudo password]
+   devops/redhat    [having sudo access without sudo password]
+   
+   user1 [passwordless - ssh, passwordless - sudo]
+   user2 [passwordless - ssh, with password - sudo]
+   user3 [with password - ssh, with password - sudo]
+   
+   
+2) VMs/Domain 
+   workstation.lab.example.com   [control node, where installed Ansible] 
+   server[a:d].lab.example.com   [Managed host, where ansible playbook executed]
+   utility.lab.example.com       [other service]
+   
+### Point-03#
+   LDAP also having [Prod, NonProd]
+   LDAP-01 - Prod 
+   LDAP-02 - Non-Prod 
+   
+   jump [prod] - LocalAcount Not LDAP 
+   jump [prod] - LDAP auth   
+
+   Security Team - SourceServer (jump) and destination [Prod, NonProd]   
+
+   Prod 
+   Stag
+   Dev
+   qa
+   Test 
+   INT
+   ..
+   ..
+   
+   
+  $ whoami 
+  student 
+  $ hostname -s
+  workstation
+  $ hostname -d
+  lab.example.com 
+  $ hostname -f 
+  workstation.lab.example.com 
+  
+  $ ansible --version 
+  Information from above.
+  - ansible-core [version 2.13]
+  - Config file - "ansible.cfg" file only  - Configuration file.
+  - Configured module search path.
+  - Ansible python module location.
+    Example- copy,debug,ping, etc 
+  - Ansible collection lacation - 
+  - Executable location - Ansible - /bin/ansible or /usr/bin/ansible
+  
+  
+ files information:-
+ 1- inventory file [can be with anyname]
+ 2- ansible.cfg file 
+ 3- ansible-navigator.yml 
+ 
+ vim inventory
+ [servers]
+ server[a:d].lab.example.com 
+ 
+ [prod]
+ server[a:b].lab.example.com 
+ 
+ [dev]
+ serverc.lab.example.com 
+ 
+ [test]
+ serverd.lab.example.com 
+ 
+ 
+ Task-01##
+ - Setup inventory, ansible.cfg, ansible-navigator.yaml
+ - Copy the playbook and execute using ansible-navigator.
+
+###########################
+- #yum install ansible-core ansible-navigator -y 
+- # ansible --version 
+  # touch ansible.cfg ansible-navigator.yaml anyname-inventory 
+  # ls -l ansible.cfg 
+  
+  1) 
+  # env | grep ANSIBLE_CONFIG 
+  # export ANSIBLE_CONFIG=/path/to/ansible.cfg 
+  Example:
+  # export ANSIBLE_CONFIG=/opt/ansible.cfg 
+   - ANSIBLE_CONFIG variable must be defined 
+   - ansible.cfg file must be present on defined location.
+  
+ 2) Current Working Dir (pwd) - ansible.cfg 
+ 
+ 3) User's home dir - /home/user/.ansible.cfg 
+ 
+ 4) /etc/ansible/ansible.cfg 
+ 
+ 
+
+  # ls -l ansible-navigator.yaml
+  
+  1) 
+  # env | grep ANSIBLE_NAVIGATOR_CONFIG 
+  # export ANSIBLE_NAVIGATOR_CONFIG=/path/to/ansible-navigator.yml  
+  Example:
+  # export ANSIBLE_NAVIGATOR_CONFIG=/opt/ansible-navigator.yml  
+   - ANSIBLE_NAVIGATOR_CONFIG variable must be defined 
+   - ansible-navigator.yml file must be present on defined location.
+  
+ 2) Current Working Dir (pwd) - ansible-navigator.yml  
+ 
+ 3) User's home dir - /home/user/.ansible-navigator.yml  
+
+ 
+ 
+ 
+   
+   
+
+
+
+
+
+
+
