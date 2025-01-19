@@ -1,0 +1,82 @@
+### Quick Recap - Day-01
+Unit-01:-  Introducing Ansible
+- Describe the motivation for automating Linux administration tasks with Ansible, 
+- fundamental Ansible concepts, and the basic architecture of Ansible.
+- Install Ansible on a control node.
+- Describe the distinction between community Ansible and Red Hat Ansible Automation Platform.
+
+#  Automation and Linux System Administration.
+  - User & Group Management
+  - File management (man test - Eg: file & file type is 'b' - so it's bloack special file).
+    copy, move/cut, permission,edit,view etc.
+  - Application Configuration (sshd,rsyslog,apache/httpd,PXE,KickStart,DHCP,DNS, LoadBalancer etc).
+  - etc 
+
+All able to perform via Ansible Automation Platform (AAP).
+  -  Infrastructure as Code (Manage infra "servers - window/Unix/Linux, Network Device - Router,switch).
+
+  - Mitigating Human Error.
+  
+
+1-Ansible to deploy applications.
+2-Configuration management.
+3-Workflow automation.
+4-Network automation. 
+5-Orchestrate the entire application lifecycle.
+
+
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+
+
+Unit-2##
+- Building an Ansible Inventory.
+- Managing Ansible Configuration Files.
+- Writing and Running Playbooks.
+- Implementing Multiple Plays.
+
+ CMDB [Servers - window/Unix/Linux ; Network - Router/Switch/Firewall]
+ - PM/VM-Vmware, cloud-
+ - DR, DC
+
+
+vim inventory (ini)
+
+Task-01:-
+- Install Apache, firewall 
+- Start apache,firewall service 
+- Deploy application 
+- Enable firewall port - 80/tcp or http 
+- Access application and validate.
+
+
+# yum install abc 123 
+# systemctl restart svc1 svc2 
+
+- john
+- joe
+- mack 
+
+
+{name: john , age: 25, workexp: 10}
+or 
+- name: john 
+  age: 25 
+  workexp: 10 
+  
+vars:
+vars_files:
+group_vars:
+host_vars:
+vim inventory w.r.t Group (HostGroup) and node level
+
+
+
+
+
+
+
+
+
+
+
+
