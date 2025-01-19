@@ -1,0 +1,41 @@
+---
+- name: 1st Play - Apache Deployment.
+  #hosts: prod 
+  hosts: serverc.lab.example.com
+  vars_files:
+    - var.yaml 
+  tasks:
+    - name: Task-01 - Install Apache & Firewalld.
+      ansible.builtin.yum:
+        name: "{{ pkg_name }}"
+        state: present
+
+    - name: Task-02 - Start service httpd & firewall, if not started
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+        enabled: true 
+      loop: "{{ service_list }}"
+ 
+    - name: Task04 - Application Deployment {{value}} {{myname}} and {{mycluster}} {{value1}} 
+      ansible.builtin.copy:
+        content: "Hello my website"
+        dest: "{{ dest_path }}"
+
+    - name: Task-05 permit traffic in default zone for https service
+      ansible.posix.firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+- name: 2nd play - Varification.
+  hosts: myself 
+  become: false 
+  tasks:
+    - name: Verify 
+      ansible.builtin.uri:
+        url: http://servera.lab.example.com
+        return_content: yes
+        status_code: 200
+...

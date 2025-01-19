@@ -1,0 +1,30 @@
+---
+- name: Multiple users & Groups
+  hosts: prod 
+  vars:
+    - group_list:
+       - unixadmin 
+       - networkadmin
+       - wintel 
+       - dbadmin
+    - users_details:
+       - {name: user1 , group_name: unixadmin , uid_no: 12345}
+       - {name: user2 , group_name: networkadmin , uid_no: 12346}
+       - {name: user3 , group_name: wintel , uid_no: 12347}
+       - {name: user4 , group_name: dbadmin , uid_no: 12348}
+  tasks:
+    - name: Group creation
+      ansible.builtin.group:
+        name: "{{ item }}"
+        state: present 
+      loop: "{{ group_list }}"
+
+    - name: Users creation
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid_no }}"
+        group: "{{ item.group_name }}"
+        state: present 
+      loop: "{{ users_details }}"
+   
+   

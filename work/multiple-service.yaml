@@ -1,0 +1,15 @@
+---
+- name: Restart multiple service 
+  hosts: prod 
+  vars:
+     - service_list:
+         - sshd
+         - rsyslog
+
+  tasks:
+    - name: Service restart 
+      ansible.builtin.service:
+        name: "{{item }}"
+        state: restarted 
+      loop: "{{ service_list}}" 
+        

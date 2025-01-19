@@ -1,0 +1,11 @@
+---
+- name: Dbug var
+  hosts: prod 
+  tasks:
+    - name: Command execute
+      ansible.builtin.shell: systemctl status sshd 
+      register: var1 
+
+    - name: Display msg.
+      ansible.builtin.debug:
+         var: var1

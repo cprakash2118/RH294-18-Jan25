@@ -1,0 +1,8 @@
+
+     - pkg_name:
+         - httpd
+         - firewalld
+     - service_list:
+         - httpd
+         - firewalld 
+     - dest_path: /var/www/html/index.html
