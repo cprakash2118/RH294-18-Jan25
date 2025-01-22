@@ -1,0 +1,20 @@
+[servers]
+server[a:d].lab.example.com 
+
+[prod]
+servera.lab.example.com   value=99 value1=100
+
+[prod:vars]
+myname=ansible-user
+mycluster=ocp4
+
+
+[dev]
+serverc.lab.example.com 
+
+[test]
+serverd.lab.example.com 
+serverb.lab.example.com 
+
+[myself]
+workstation.lab.example.com

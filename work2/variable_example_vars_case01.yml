@@ -1,0 +1,22 @@
+---
+- name: Variable example 
+  hosts: dev
+  vars:
+    - group_name: unix
+    - group_id: 1234
+    - user_name: john
+    - uid_id: 1234
+  tasks:
+    - name: Create group.
+      ansible.builtin.group:
+        name: "{{ group_name }}"
+        gid: "{{ group_id }}"
+        state: present 
+
+    - name: Create user.
+      ansible.builtin.user:
+        name: "{{ user_name }}"
+        uid: "{{ uid_id}}"
+        state: present 
+        group: "{{ group_name }}"
+      

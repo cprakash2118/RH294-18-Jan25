@@ -1,0 +1,29 @@
+---
+- name: Group and User creation.
+  hosts: dev
+  vars:
+    - group_name_unix: unixadmin
+    - group_name_middleware: middleware
+    - user_name_unix: john2 
+    - user_name_middleware: joe2 
+    - pass_var: redhat123
+  tasks:
+    - name: User Create - john2
+      ansible.builtin.user:
+        name: "{{ user_name_unix }}"
+        state: absent 
+
+    - name: User Create - joe2
+      ansible.builtin.user:
+        name: "{{ user_name_middleware }}"
+        state: absent 
+
+    - name: Group deletion - unixadmin 
+      ansible.builtin.group:
+        name: "{{ group_name_unix }}"
+        state: absent 
+
+    - name: Group deletion - middleware 
+      ansible.builtin.group:
+        name: "{{ group_name_middleware }}"
+        state: absent

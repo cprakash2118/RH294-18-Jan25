@@ -1,0 +1,39 @@
+---
+- name: Users & Groups creation - 1st Play
+  hosts: serverc.lab.example.com 
+  vars:
+    - group_name_1st: unix 
+    - group_name_2nd: dba
+    - user_name_1st: john
+    - user_name_2nd: mack
+    - password_for_john: redhat
+    - password_for_john: "{{ 'redhat' | password_hash('sha256')}}"
+    - password_for_mack: redhat123
+
+  tasks:
+    - name: Groups Creation - unix 
+      ansible.builtin.group:
+        name: "{{ group_name_1st }}"
+        state: present
+    - name: Groups Creation - dba 
+      ansible.builtin.group:
+        name: "{{ group_name_2nd }}"
+        state: present
+
+    - name: User Creation - john
+      ansible.builtin.user:
+        name: "{{ user_name_1st }}"
+        #password: "{{ 'password_for_john' | password_hash('sha256')}}"
+        #password: "{{ password_for_john | password_hash('sha256')}}"
+        password: "{{ password_for_john }}"
+        groups: "{{ group_name_1st }}"
+        state: present
+        #update_password: on_create
+    - name: User Creation - mack
+      ansible.builtin.user:
+        name: "{{ user_name_2nd }}"
+        password: "{{password_for_mack  | password_hash('sha512')}}"
+        groups: "{{ group_name_2nd }}"
+        state: present
+        #update_password: on_create
+...

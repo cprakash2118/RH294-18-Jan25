@@ -1,0 +1,12 @@
+---
+- name: register - type 2 case 
+  hosts: dev 
+  tasks:
+    - name: Ansible Facts.
+      ansible.builtin.setup: 
+      register: setup_output
+
+    - name: Display
+      ansible.builtin.debug:
+        var: setup_output
+        

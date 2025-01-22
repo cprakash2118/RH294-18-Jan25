@@ -1,0 +1,36 @@
+---
+- name: Register var concepts 
+  hosts: dev
+  tasks:
+    - name: command execution 
+      ansible.builtin.shell: systemctl status sshd 
+      register: ssh_output
+
+    - name: Playbook module - user.
+      ansible.builtin.user:
+        name: jack 
+        state: present
+        password: "{{ 'redhat' | password_hash('sha512') }}"
+      register: user_output
+
+    - name: Display var - ssh_output
+      ansible.builtin.debug: 
+        var: ssh_output
+
+    - name: Display var only rc - ssh_output
+      ansible.builtin.debug: 
+        var: ssh_output.rc
+
+    - name: Task - rc check 
+      ansible.builtin.debug:
+        msg: "My task "
+      failed_when: ssh_output.rc == 0
+
+    - name: Display var - user_output
+      ansible.builtin.debug: 
+        var: user_output
+
+    - name: Display var only uid - user_output
+      ansible.builtin.debug: 
+        var: user_output.uid
+
